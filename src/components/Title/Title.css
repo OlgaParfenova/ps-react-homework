@@ -1,0 +1,9 @@
+.title {
+  color: var(--grey-50);
+  font-size: var(--font-size-h1);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 80px;
+  letter-spacing: -1.28px;
+  font-family: inherit;
+}
