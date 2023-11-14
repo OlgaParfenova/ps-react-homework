@@ -1,0 +1,12 @@
+.spotGreen {
+  position: absolute;
+  left: 970px;
+  top: 1340px;
+  background: #02523a;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  box-shadow: 0 0 460px 190px #02523a;
+  z-index: -1;
+  transform: rotate(15deg);
+}

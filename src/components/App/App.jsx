@@ -1,12 +1,15 @@
 import { Title } from '../Title';
 import { Button } from '../Button';
 import { Paragraph } from '../Paragraph';
+import { SpotBlue, SpotNavy } from '../../layout';
 
 import './App.css';
 
 export const App = () => {
   return (
     <div className='app-wrapper'>
+      <SpotBlue />
+      <SpotNavy />
       <Title text='Поиск' />
       <Button text='Искать' />
       <Button text='Войти в профиль' />

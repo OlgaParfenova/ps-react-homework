@@ -9,8 +9,10 @@
 
 * {
   font-family: Roboto, sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #251e62;
+  background-color: #121829;
+  position: relative;
 }

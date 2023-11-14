@@ -1,0 +1,12 @@
+.spotPurple {
+  position: absolute;
+  left: 570px;
+  top: 1280px;
+  background: #492c66;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  box-shadow: 0 0 460px 170px #492c66;
+  z-index: -1;
+  transform: rotate(15deg);
+}
