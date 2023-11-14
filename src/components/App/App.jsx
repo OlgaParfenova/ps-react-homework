@@ -1,7 +1,9 @@
 import { Title } from '../Title';
 import { Button } from '../Button';
 import { Paragraph } from '../Paragraph';
+import { Search } from '../Search';
 import { SpotBlue, SpotNavy } from '../../layout';
+import SearchIcon from '../../assets/icons/Search.svg';
 
 import './App.css';
 
@@ -18,7 +20,7 @@ export const App = () => {
     <div className='app-wrapper'>
       <SpotBlue />
       <SpotNavy />
-      <Title text='Поиск' />
+      <Title text='Вход' />
       <Button text='Искать' handleButtonClick={handleButtonClick1} />
       <Button text='Войти в профиль' handleButtonClick={handleButtonClick2} />
       <Paragraph
@@ -29,6 +31,7 @@ export const App = () => {
         text='Однозначно, ключевые особенности структуры проекта призваны к ответу. Лишь стремящиеся вытеснить традиционное производство, нанотехнологии объективно рассмотрены соответствующими инстанциями.'
         type='large'
       />
+      <Search placeholder='Ваше имя' icon={SearchIcon} />
     </div>
   );
 };
