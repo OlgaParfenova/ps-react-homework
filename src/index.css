@@ -4,6 +4,7 @@
   --grey-50: #ebeef5;
   --font-size-h1: 64px;
   --primary-400: #7b6ef6;
+  --grey-200: #a8aebf;
   --grey-300: #8e95a9;
   --grey-700: #323b54;
   --grey-600: #475069;
@@ -18,4 +19,5 @@
 body {
   background-color: #121829;
   position: relative;
+  min-height: 100vh;
 }

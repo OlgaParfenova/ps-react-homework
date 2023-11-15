@@ -4,9 +4,10 @@ h1 {
 
 .app-wrapper {
   position: relative;
-  min-height: 100vh;
   max-width: calc(1200px + 32px);
+  min-height: 100%;
   padding-left: 16px;
   padding-right: 16px;
   margin: 0 auto;
+  padding-top: 160px;
 }

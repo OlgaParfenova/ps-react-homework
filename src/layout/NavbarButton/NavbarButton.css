@@ -1,0 +1,15 @@
+.navbar__link {
+  color: var(--grey-200);
+  text-decoration: none;
+  margin-right: calc(32px + 16px);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__icon {
+  margin-left: 8px;
+}
