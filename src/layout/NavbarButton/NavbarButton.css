@@ -10,6 +10,19 @@
   align-items: center;
 }
 
-.navbar__icon {
+.navbar__link-icon {
   margin-left: 8px;
+}
+
+.navbar__link-label {
+  width: 24px;
+  height: 24px;
+  background-color: #7b6ef6;
+  border-radius: 50%;
+  color: #fff;
+  margin-left: 8px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

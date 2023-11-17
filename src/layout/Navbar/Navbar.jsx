@@ -1,7 +1,6 @@
 import { NavbarButton } from '../NavbarButton';
 
 import Logo from '../../assets/icons/Logo.svg';
-import MyFilms from '../../assets/icons/MyFilms.svg';
 import Login from '../../assets/icons/Login.svg';
 
 import './Navbar.css';
@@ -15,7 +14,7 @@ export const Navbar = () => {
         </a>
         <div className='navbar__buttons'>
           <NavbarButton text='Поиск фильмов' />
-          <NavbarButton text='Мои фильмы' icon={MyFilms} />
+          <NavbarButton text='Мои фильмы' label='1' />
           <NavbarButton text='Войти' icon={Login} />
         </div>
       </div>
