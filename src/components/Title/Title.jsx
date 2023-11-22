@@ -1,5 +1,5 @@
 import './Title.css';
 
-export const Title = ({ text }) => {
-  return <div className='title'>{text}</div>;
+export const Title = ({ text, cl }) => {
+  return <div className={`title ${cl ? cl : ''}`}>{text}</div>;
 };

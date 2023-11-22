@@ -1,0 +1,26 @@
+.search__page {
+  margin-bottom: 58px;
+}
+
+.search__page-title {
+  margin-bottom: 16px;
+}
+
+.search__page-paragraph {
+  margin-bottom: 24px;
+  max-width: 590px;
+}
+
+.search__page-input {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 80px;
+}
+
+.search__page-films {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: auto;
+  column-gap: 24px;
+  row-gap: 16px;
+}
