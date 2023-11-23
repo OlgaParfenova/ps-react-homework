@@ -13,6 +13,17 @@ import SearchIcon from '../../assets/icons/Search.svg';
 
 import './SearchPage.css';
 
+const filmsInfo = [
+  { title: 'Black widow', rating: '325', cover: BW },
+  { title: 'Shang Chi', rating: '124', cover: SC },
+  { title: 'Loki', rating: '235', cover: LOKI },
+  { title: 'How I Met Your Mother', rating: '123', cover: HIMYM },
+  { title: 'Money Heist', rating: '8125', cover: MH },
+  { title: 'Friends', rating: '123', cover: FR },
+  { title: 'The Big Bang Theory', rating: '12', cover: TBBT },
+  { title: 'Two And a Half Men', rating: '456', cover: TAHM },
+];
+
 export const SearchPage = () => {
   const handleButtonClick1 = () => {
     console.log('clicked 1!');
@@ -33,14 +44,14 @@ export const SearchPage = () => {
         <Button text='Искать' handleButtonClick={handleButtonClick1} />
       </div>
       <div className='search__page-films'>
-        <FilmCard title='Black widow' rating='325' cover={BW} />
-        <FilmCard title='Shang Chi' rating='124' cover={SC} />
-        <FilmCard title='Loki' rating='235' cover={LOKI} />
-        <FilmCard title='How I Met Your Mother' rating='123' cover={HIMYM} />
-        <FilmCard title='Money Heist' rating='8125' cover={MH} />
-        <FilmCard title='Friends' rating='123' cover={FR} />
-        <FilmCard title='The Big Bang Theory' rating='12' cover={TBBT} />
-        <FilmCard title='Two And a Half Men' rating='456' cover={TAHM} />
+        {filmsInfo.map((element) => (
+          <FilmCard
+            key={element.title}
+            title={element.title}
+            rating={element.rating}
+            cover={element.cover}
+          />
+        ))}
       </div>
     </div>
   );
