@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { NavbarButton } from '../NavbarButton';
 
 import Logo from '../../assets/icons/Logo.svg';
@@ -9,9 +11,9 @@ export const Navbar = () => {
   return (
     <div className='navbar'>
       <div className='navbar__content'>
-        <a href='#'>
+        <Link to='/'>
           <img src={Logo} alt='Логотип' className='navbar__logo' />
-        </a>
+        </Link>
         <div className='navbar__buttons'>
           <NavbarButton text='Поиск фильмов' />
           <NavbarButton text='Мои фильмы' label='1' />
