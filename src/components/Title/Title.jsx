@@ -1,5 +1,9 @@
+import classNames from 'classnames';
+
 import styles from './Title.module.css';
 
 export const Title = ({ text, cl }) => {
-  return <div className={`${styles['title']} ${cl ? cl : ''}`}>{text}</div>;
+  const titleClasses = classNames(styles['title'], cl);
+
+  return <div className={titleClasses}>{text}</div>;
 };
