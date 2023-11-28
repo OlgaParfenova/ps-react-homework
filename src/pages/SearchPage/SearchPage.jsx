@@ -11,7 +11,7 @@ import TBBT from '../../assets/images/7.png';
 import TAHM from '../../assets/images/8.png';
 import SearchIcon from '../../assets/icons/Search.svg';
 
-import './SearchPage.css';
+import styles from './SearchPage.module.css';
 
 const filmsInfo = [
   { title: 'Black widow', rating: '325', cover: BW },
@@ -30,20 +30,20 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className='search__page'>
+    <div className={styles['search__page']}>
       <SpotBlue />
       <SpotNavy />
-      <Title text='Поиск' cl='search__page-title' />
+      <Title text='Поиск' cl={styles['search__page-title']} />
       <Paragraph
         text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
         type='medium'
-        cl='search__page-paragraph'
+        cl={styles['search__page-paragraph']}
       />
-      <div className='search__page-input'>
+      <div className={styles['search__page-input']}>
         <Search placeholder='Введите название' icon={SearchIcon} />
         <Button text='Искать' handleButtonClick={handleButtonClick1} />
       </div>
-      <div className='search__page-films'>
+      <div className={styles['search__page-films']}>
         {filmsInfo.map((element) => (
           <FilmCard
             key={element.title}

@@ -2,27 +2,27 @@ import { ButtonFavourites } from '../ButtonFavorites';
 
 import RatingIcon from '../../assets/icons/Rating.svg';
 
-import './FilmCard.css';
+import styles from './FilmCard.module.css';
 
 export const FilmCard = ({ cover, title, rating }) => {
   return (
-    <div className='card'>
-      <div className='card__backlayer'>
-        <img src={cover} alt='' className='card__backlayer-img' />
+    <div className={styles['card']}>
+      <div className={styles['card__backlayer']}>
+        <img src={cover} alt='' className={styles['card__backlayer-img']} />
       </div>
-      <div className='card__rating'>
+      <div className={styles['card__rating']}>
         <img src={RatingIcon} alt='rating' /> {rating}
       </div>
-      <div className='card__cover'>
+      <div className={styles['card__cover']}>
         {cover ? (
           <img src={cover} alt={title} />
         ) : (
-          <p className='card__empty'>Обложка не загружена</p>
+          <p className={styles['card__empty']}>Обложка не загружена</p>
         )}
       </div>
 
-      <div className='card__title'>{title}</div>
-      <ButtonFavourites cl='card__fav-button' />
+      <div className={styles['card__title']}>{title}</div>
+      <ButtonFavourites cl={styles['card__fav-button']} />
     </div>
   );
 };

@@ -4,13 +4,13 @@ import { Navbar } from '../../layout';
 
 import { SearchPage, NotFoundPage } from '../../pages';
 
-import './App.css';
+import styles from './App.module.css';
 
 export const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className='app-wrapper'>
+      <div className={styles['app-wrapper']}>
         <Routes>
           <Route path='/' element={<SearchPage />} />
           <Route path='*' element={<NotFoundPage />} />

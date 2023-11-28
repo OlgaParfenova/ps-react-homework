@@ -1,14 +1,14 @@
-import './Search.css';
+import styles from './Search.module.css';
 
 export const Search = ({ placeholder, icon }) => {
   return (
-    <div className='search'>
+    <div className={styles['search']}>
       <input
         type='text'
         placeholder={placeholder}
-        className={`search__input ${icon ? 'search__input--icon' : ''}`}
+        className={`${styles['search__input']} ${icon ? styles['search__input--icon'] : ''}`}
       />
-      {icon && <img src={icon} alt='Поиск' className='search__icon' />}
+      {icon ? <img src={icon} alt='Поиск' className={styles['search__icon']} /> : null}
     </div>
   );
 };
