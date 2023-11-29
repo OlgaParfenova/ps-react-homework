@@ -1,0 +1,25 @@
+.button__favourites {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.32px;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add {
+  color: var(--primary-400);
+}
+
+.added {
+  color: var(--success-400);
+}
+
+.button__icon {
+  margin-right: 8px;
+}

@@ -1,0 +1,12 @@
+.spotNavy {
+  position: absolute;
+  left: 1040px;
+  top: 240px;
+  background: #251e62;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  box-shadow: 0 0 460px 200px #251e62;
+  z-index: -1;
+  transform: rotate(15deg);
+}
