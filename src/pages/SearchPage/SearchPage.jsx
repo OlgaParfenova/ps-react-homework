@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react';
+
 import { Title, Search, Button, Paragraph, FilmCard } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layout';
 
@@ -25,24 +27,39 @@ const filmsInfo = [
 ];
 
 export const SearchPage = () => {
-  const handleButtonClick1 = () => {
-    console.log('clicked 1!');
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const searchRef = useRef(null);
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    setIsButtonClicked(true);
+    searchRef.current.focus();
   };
 
   return (
     <div className={styles['search__page']}>
       <SpotBlue />
       <SpotNavy />
-      <Title text='Поиск' cl={styles['search__page-title']} />
-      <Paragraph
-        text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
-        type='medium'
-        cl={styles['search__page-paragraph']}
-      />
-      <div className={styles['search__page-input']}>
-        <Search placeholder='Введите название' icon={SearchIcon} />
-        <Button text='Искать' handleButtonClick={handleButtonClick1} />
-      </div>
+      <form>
+        <Title text='Поиск' cl={styles['search__page-title']} />
+        <Paragraph
+          text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
+          type='medium'
+          cl={styles['search__page-paragraph']}
+        />
+        <div className={styles['search__page-input']}>
+          <Search
+            placeholder='Введите название'
+            icon={SearchIcon}
+            isButtonClicked={isButtonClicked}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            searchRef={searchRef}
+          />
+          <Button text='Искать' handleButtonClick={handleButtonClick} />
+        </div>
+      </form>
       <div className={styles['search__page-films']}>
         {filmsInfo.map((element) => (
           <FilmCard
