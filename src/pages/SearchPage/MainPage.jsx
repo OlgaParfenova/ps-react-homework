@@ -26,7 +26,7 @@ const filmsInfo = [
   { title: 'Two And a Half Men', rating: '456', cover: TAHM },
 ];
 
-export const SearchPage = () => {
+export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const searchRef = useRef(null);
@@ -55,7 +55,7 @@ export const SearchPage = () => {
             isButtonClicked={isButtonClicked}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
-            searchRef={searchRef}
+            ref={searchRef}
           />
           <Button text='Искать' handleButtonClick={handleButtonClick} />
         </div>
