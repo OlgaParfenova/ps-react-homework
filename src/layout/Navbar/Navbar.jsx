@@ -11,13 +11,10 @@ import styles from './Navbar.module.css';
 export const Navbar = ({ isLogined, setLoginValue }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    // user.isLogined = false;
-    // localStorage.setItem('user', JSON.stringify(user));
     setLoginValue(false);
   };
 
-  const activeUser = JSON.parse(localStorage.getItem('user'));
+  const auth = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className={styles['navbar']}>
@@ -30,7 +27,7 @@ export const Navbar = ({ isLogined, setLoginValue }) => {
           <NavbarButton text='Мои фильмы' label='1' />
           {isLogined ? (
             <>
-              <NavbarButton text={activeUser.name} icon={User} />
+              <NavbarButton text={auth.name} icon={User} />
               <NavbarButton text='Выйти' onClick={handleLogout} />
             </>
           ) : (

@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { Navbar } from '../../layout';
 import { CheckLogin } from '../CheckLogin';
-
 import { MainPage, NotFoundPage, LoginPage } from '../../pages';
 
 import styles from './App.module.css';

@@ -1,3 +1,3 @@
-export * from './SearchPage';
+export * from './MainPage';
 export * from './NotFoundPage';
 export * from './LoginPage';
