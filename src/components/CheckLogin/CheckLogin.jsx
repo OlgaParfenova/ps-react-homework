@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../context';
 
-export const CheckLogin = ({ setLoginValue, isLogined }) => {
+export const CheckLogin = () => {
+  const { isLogined, setLoginValue } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const [isInitialApp, setIsInitialApp] = useState(true);

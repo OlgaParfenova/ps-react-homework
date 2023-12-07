@@ -1,4 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context';
 
 import { NavbarButton } from '../NavbarButton';
 
@@ -8,7 +10,8 @@ import User from '../../assets/icons/User.svg';
 
 import styles from './Navbar.module.css';
 
-export const Navbar = ({ isLogined, setLoginValue }) => {
+export const Navbar = () => {
+  const { isLogined, setLoginValue } = useContext(UserContext);
   const navigate = useNavigate();
   const handleLogout = () => {
     setLoginValue(false);

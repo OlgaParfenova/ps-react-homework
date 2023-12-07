@@ -13,7 +13,7 @@ import TBBT from '../../assets/images/7.png';
 import TAHM from '../../assets/images/8.png';
 import SearchIcon from '../../assets/icons/Search.svg';
 
-import styles from './SearchPage.module.css';
+import styles from './MainPage.module.css';
 
 const filmsInfo = [
   { title: 'Black widow', rating: '325', cover: BW },

@@ -1,12 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SpotBlue, SpotNavy } from '../../layout';
 import { Title, Search, Button } from '../../components';
+import { UserContext } from '../../context';
 
 import styles from './LoginPage.module.css';
 
-export const LoginPage = ({ setLoginValue }) => {
+export const LoginPage = () => {
+  const { setLoginValue } = useContext(UserContext);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const searchRef = useRef(null);
