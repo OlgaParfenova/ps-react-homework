@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../context';
+import { UserContext, useIsLogined } from '../../context/UserContext';
 
 import { NavbarButton } from '../NavbarButton';
 
@@ -11,13 +11,15 @@ import User from '../../assets/icons/User.svg';
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {
-  const { isLogined, setLoginValue } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const handleLogout = () => {
-    setLoginValue(false);
+  const isLogined = useIsLogined();
+  const handleLogoutButtonClick = () => {
+    setUser(null);
   };
-
-  const auth = JSON.parse(localStorage.getItem('user'));
+  const handleLoginButtonClick = () => {
+    navigate('/login');
+  };
 
   return (
     <div className={styles['navbar']}>
@@ -30,11 +32,11 @@ export const Navbar = () => {
           <NavbarButton text='Мои фильмы' label='1' />
           {isLogined ? (
             <>
-              <NavbarButton text={auth.name} icon={User} />
-              <NavbarButton text='Выйти' onClick={handleLogout} />
+              <NavbarButton text={user ? user.name : ''} icon={User} />
+              <NavbarButton text='Выйти' onClick={handleLogoutButtonClick} />
             </>
           ) : (
-            <NavbarButton text='Войти' onClick={() => navigate('/')} icon={Login} />
+            <NavbarButton text='Войти' onClick={handleLoginButtonClick} icon={Login} />
           )}
         </div>
       </div>

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { SpotBlue, SpotNavy } from '../../layout';
 import { Title, Search, Button } from '../../components';
-import { UserContext } from '../../context';
+import { UserContext } from '../../context/UserContext';
 
 import styles from './LoginPage.module.css';
 
 export const LoginPage = () => {
-  const { setLoginValue } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const searchRef = useRef(null);
@@ -17,15 +17,13 @@ export const LoginPage = () => {
   const handleButtonClick = (e) => {
     e.preventDefault();
     setIsButtonClicked(true);
-    searchRef.current.focus();
-
+    searchRef.current?.focus();
     if (searchValue !== '') {
       const user = {
         name: searchValue,
         isLogined: true,
       };
-      localStorage.setItem('user', JSON.stringify(user));
-      setLoginValue(true);
+      setUser(user);
       navigate('/');
     }
   };

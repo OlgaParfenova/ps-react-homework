@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from '../../layout';
 import { CheckLogin } from '../CheckLogin';
 import { MainPage, NotFoundPage, LoginPage } from '../../pages';
-import { UserContextProvider } from '../../context';
+import { UserContextProvider } from '../../context/UserContext';
 
 import styles from './App.module.css';
 

@@ -20,7 +20,6 @@ export const FilmCard = ({ cover, title, rating }) => {
           <p className={styles['card__empty']}>Обложка не загружена</p>
         )}
       </div>
-
       <div className={styles['card__title']}>{title}</div>
       <ButtonFavourites cl={styles['card__fav-button']} />
     </div>

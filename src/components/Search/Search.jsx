@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,10 +6,12 @@ import styles from './Search.module.css';
 
 export const Search = forwardRef(
   ({ placeholder, icon, isButtonClicked, searchValue, setSearchValue }, ref) => {
-    const inputClasses = classNames(styles['search__input'], {
-      [styles['search__input--icon']]: icon,
-      [styles['search__input--error']]: isButtonClicked && searchValue === '',
-    });
+    const inputClasses = useMemo(() => {
+      return classNames(styles['search__input'], {
+        [styles['search__input--icon']]: icon,
+        [styles['search__input--error']]: isButtonClicked && searchValue === '',
+      });
+    }, [icon, isButtonClicked, searchValue]);
 
     const handleInputChange = (e) => {
       setSearchValue(e.target.value);
