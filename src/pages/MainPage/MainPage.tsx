@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, MouseEvent } from 'react';
 
 import { Title, Search, Button, Paragraph, FilmCard } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layout';
@@ -29,12 +29,12 @@ const filmsInfo = [
 export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement | null>(null);
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
-    searchRef.current.focus();
+    searchRef.current?.focus();
   };
 
   return (
@@ -42,12 +42,10 @@ export const MainPage = () => {
       <SpotBlue />
       <SpotNavy />
       <form>
-        <Title text='Поиск' cl={styles['search__page-title']} />
-        <Paragraph
-          text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
-          type='medium'
-          cl={styles['search__page-paragraph']}
-        />
+        <Title className={styles['search__page-title']}>Поиск</Title>
+        <Paragraph type='medium' className={styles['search__page-paragraph']}>
+          Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.
+        </Paragraph>
         <div className={styles['search__page-input']}>
           <Search
             placeholder='Введите название'
@@ -57,7 +55,7 @@ export const MainPage = () => {
             setSearchValue={setSearchValue}
             ref={searchRef}
           />
-          <Button text='Искать' handleButtonClick={handleButtonClick} />
+          <Button onClick={handleButtonClick}>Искать</Button>
         </div>
       </form>
       <div className={styles['search__page-films']}>

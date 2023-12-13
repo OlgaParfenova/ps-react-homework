@@ -1,10 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../user.context';
 
-export const useIsLogined = () => {
+export const useIsLogined = (): boolean => {
   const context = useContext(UserContext);
-  if (context && context.user !== null) {
-    return true;
-  }
-  return false;
+  return context.user !== null;
 };

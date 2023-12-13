@@ -1,20 +1,19 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, FC } from 'react';
 import classNames from 'classnames';
-
+import { ButtonFavouritesProps } from './ButtonFavourites.props';
 import AddFavourites from '../../assets/icons/AddFavourites.svg';
 import AddedToFavourites from '../../assets/icons/AddedToFavourites.svg';
-
 import styles from './ButtonFavourites.module.css';
 
-export const ButtonFavourites = ({ cl }) => {
+export const ButtonFavourites: FC<ButtonFavouritesProps> = ({ className }) => {
   const [isFavourite, setIsFavourite] = useState(false);
   const buttonClasses = useMemo(() => {
     return classNames(
       styles['button__favourites'],
       { [styles['added']]: isFavourite, [styles['add']]: !isFavourite },
-      cl,
+      className,
     );
-  }, [cl, isFavourite]);
+  }, [className, isFavourite]);
 
   const handleButtonClick = () => {
     setIsFavourite(!isFavourite);

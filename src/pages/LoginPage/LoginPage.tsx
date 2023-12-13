@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SpotBlue, SpotNavy } from '../../layout';
@@ -11,10 +11,10 @@ export const LoginPage = () => {
   const { setUser } = useContext(UserContext);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
     searchRef.current?.focus();
@@ -33,7 +33,7 @@ export const LoginPage = () => {
       <SpotBlue />
       <SpotNavy />
       <form>
-        <Title text='Вход' cl={styles['login__page-title']} />
+        <Title className={styles['login__page-title']}>Вход</Title>
         <div className={styles['login__page-input']}>
           <Search
             placeholder='Ваше имя'
@@ -42,7 +42,7 @@ export const LoginPage = () => {
             setSearchValue={setSearchValue}
             ref={searchRef}
           />
-          <Button text='Войти в профиль' handleButtonClick={handleButtonClick} />
+          <Button onClick={handleButtonClick}>Войти в профиль</Button>
         </div>
       </form>
     </div>

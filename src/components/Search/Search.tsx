@@ -1,10 +1,9 @@
-import { forwardRef, useMemo } from 'react';
-
+import { forwardRef, useMemo, ChangeEvent } from 'react';
 import classNames from 'classnames';
-
+import { SearchProps } from './Search.props';
 import styles from './Search.module.css';
 
-export const Search = forwardRef(
+export const Search = forwardRef<HTMLInputElement, SearchProps>(
   ({ placeholder, icon, isButtonClicked, searchValue, setSearchValue }, ref) => {
     const inputClasses = useMemo(() => {
       return classNames(styles['search__input'], {
@@ -13,7 +12,7 @@ export const Search = forwardRef(
       });
     }, [icon, isButtonClicked, searchValue]);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
     };
 

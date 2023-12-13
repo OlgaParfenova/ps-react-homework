@@ -3,8 +3,8 @@ import { Paragraph, Title } from '../../components';
 export const NotFoundPage = () => {
   return (
     <>
-      <Title text='Ошибка 404' />
-      <Paragraph text='Страница не найдена' type='large' />
+      <Title>Ошибка 404</Title>
+      <Paragraph type='large'>Страница не найдена</Paragraph>
     </>
   );
 };
