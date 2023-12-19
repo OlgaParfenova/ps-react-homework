@@ -1,13 +1,11 @@
-import { Link } from 'react-router-dom';
+import styles from './NavbarButton.module.css';
 
-import './NavbarButton.css';
-
-export const NavbarButton = ({ text, icon, label }) => {
+export const NavbarButton = ({ text, icon, label, onClick }) => {
   return (
-    <Link to='#' className='navbar__link'>
+    <button type='button' className={styles['navbar__link']} onClick={onClick}>
       {text}
-      {icon ? <img src={icon} alt='' className='navbar__link-icon' /> : null}
-      {label ? <div className='navbar__link-label'>{label}</div> : null}
-    </Link>
+      {icon ? <img src={icon} alt='' className={styles['navbar__link-icon']} /> : null}
+      {label ? <div className={styles['navbar__link-label']}>{label}</div> : null}
+    </button>
   );
 };

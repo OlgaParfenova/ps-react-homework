@@ -1,5 +1,5 @@
-import './SpotBlue.css';
+import styles from './SpotBlue.module.css';
 
 export const SpotBlue = () => {
-  return <div className='spotBlue'></div>;
+  return <div className={styles['spotBlue']}></div>;
 };

@@ -24,3 +24,7 @@
 .search__input--icon {
   padding-left: calc(16px + 24px + 16px);
 }
+
+.search__input--error {
+  background-color: rgba(225, 43, 43, 0.35);
+}

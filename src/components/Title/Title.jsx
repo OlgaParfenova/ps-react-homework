@@ -1,5 +1,13 @@
-import './Title.css';
+import { useMemo } from 'react';
+
+import classNames from 'classnames';
+
+import styles from './Title.module.css';
 
 export const Title = ({ text, cl }) => {
-  return <div className={`title ${cl ? cl : ''}`}>{text}</div>;
+  const titleClasses = useMemo(() => {
+    return classNames(styles['title'], cl);
+  }, [cl]);
+
+  return <div className={titleClasses}>{text}</div>;
 };

@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react';
+
 import { Title, Search, Button, Paragraph, FilmCard } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layout';
 
@@ -11,7 +13,7 @@ import TBBT from '../../assets/images/7.png';
 import TAHM from '../../assets/images/8.png';
 import SearchIcon from '../../assets/icons/Search.svg';
 
-import './SearchPage.css';
+import styles from './MainPage.module.css';
 
 const filmsInfo = [
   { title: 'Black widow', rating: '325', cover: BW },
@@ -24,26 +26,41 @@ const filmsInfo = [
   { title: 'Two And a Half Men', rating: '456', cover: TAHM },
 ];
 
-export const SearchPage = () => {
-  const handleButtonClick1 = () => {
-    console.log('clicked 1!');
+export const MainPage = () => {
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const searchRef = useRef(null);
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    setIsButtonClicked(true);
+    searchRef.current.focus();
   };
 
   return (
-    <div className='search__page'>
+    <div className={styles['search__page']}>
       <SpotBlue />
       <SpotNavy />
-      <Title text='Поиск' cl='search__page-title' />
-      <Paragraph
-        text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
-        type='medium'
-        cl='search__page-paragraph'
-      />
-      <div className='search__page-input'>
-        <Search placeholder='Введите название' icon={SearchIcon} />
-        <Button text='Искать' handleButtonClick={handleButtonClick1} />
-      </div>
-      <div className='search__page-films'>
+      <form>
+        <Title text='Поиск' cl={styles['search__page-title']} />
+        <Paragraph
+          text='Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
+          type='medium'
+          cl={styles['search__page-paragraph']}
+        />
+        <div className={styles['search__page-input']}>
+          <Search
+            placeholder='Введите название'
+            icon={SearchIcon}
+            isButtonClicked={isButtonClicked}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            ref={searchRef}
+          />
+          <Button text='Искать' handleButtonClick={handleButtonClick} />
+        </div>
+      </form>
+      <div className={styles['search__page-films']}>
         {filmsInfo.map((element) => (
           <FilmCard
             key={element.title}

@@ -1,21 +1,26 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Navbar } from '../../layout';
+import { CheckLogin } from '../CheckLogin';
+import { MainPage, NotFoundPage, LoginPage } from '../../pages';
+import { UserContextProvider } from '../../context/UserContext';
 
-import { SearchPage, NotFoundPage } from '../../pages';
-
-import './App.css';
+import styles from './App.module.css';
 
 export const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <div className='app-wrapper'>
-        <Routes>
-          <Route path='/' element={<SearchPage />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <UserContextProvider>
+      <Router>
+        <CheckLogin />
+        <Navbar />
+        <div className={styles['app-wrapper']}>
+          <Routes>
+            <Route path='/' element={<MainPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='*' element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </UserContextProvider>
   );
 };

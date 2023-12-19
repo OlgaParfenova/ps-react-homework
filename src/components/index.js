@@ -5,3 +5,4 @@ export * from './Paragraph';
 export * from './Search';
 export * from './FilmCard';
 export * from './ButtonFavorites';
+export * from './CheckLogin';

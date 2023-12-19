@@ -1,5 +1,13 @@
-import './Paragraph.css';
+import { useMemo } from 'react';
+
+import classNames from 'classnames';
+
+import styles from './Paragraph.module.css';
 
 export const Paragraph = ({ text, cl, type = 'medium' | 'large' }) => {
-  return <p className={`paragraph paragraph--${type} ${cl ? cl : ''}`}>{text}</p>;
+  const className = useMemo(() => {
+    return classNames(styles['paragraph'], styles[`paragraph--${type}`], cl);
+  }, [type, cl]);
+
+  return <p className={className}>{text}</p>;
 };

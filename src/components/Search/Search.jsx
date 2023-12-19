@@ -1,14 +1,35 @@
-import './Search.css';
+import { forwardRef, useMemo } from 'react';
 
-export const Search = ({ placeholder, icon }) => {
-  return (
-    <div className='search'>
-      <input
-        type='text'
-        placeholder={placeholder}
-        className={`search__input ${icon ? 'search__input--icon' : ''}`}
-      />
-      {icon && <img src={icon} alt='Поиск' className='search__icon' />}
-    </div>
-  );
-};
+import classNames from 'classnames';
+
+import styles from './Search.module.css';
+
+export const Search = forwardRef(
+  ({ placeholder, icon, isButtonClicked, searchValue, setSearchValue }, ref) => {
+    const inputClasses = useMemo(() => {
+      return classNames(styles['search__input'], {
+        [styles['search__input--icon']]: icon,
+        [styles['search__input--error']]: isButtonClicked && searchValue === '',
+      });
+    }, [icon, isButtonClicked, searchValue]);
+
+    const handleInputChange = (e) => {
+      setSearchValue(e.target.value);
+    };
+
+    return (
+      <div className={styles['search']}>
+        <input
+          type='text'
+          placeholder={placeholder}
+          className={inputClasses}
+          ref={ref}
+          onChange={handleInputChange}
+        />
+        {icon ? <img src={icon} alt='Поиск' className={styles['search__icon']} /> : null}
+      </div>
+    );
+  },
+);
+
+Search.displayName = 'Search';

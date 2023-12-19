@@ -1,5 +1,5 @@
-import './SpotNavy.css';
+import styles from './SpotNavy.module.css';
 
 export const SpotNavy = () => {
-  return <div className='spotNavy'></div>;
+  return <div className={styles['spotNavy']}></div>;
 };
