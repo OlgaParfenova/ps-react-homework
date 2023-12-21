@@ -1,5 +1,5 @@
 import { Paragraph, Subtitle, LabelText, FilmRating, ButtonFavourites } from '../../components';
-import { Paper, SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layout';
+import { Paper, SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
 import poster from '../../assets/images/film-poster-demo.png';
 import styles from './MoviePage.module.css';
 

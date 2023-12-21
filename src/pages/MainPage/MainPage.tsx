@@ -1,7 +1,7 @@
 import { useState, useRef, MouseEvent } from 'react';
 
-import { Title, Search, Button, Paragraph, FilmCard } from '../../components';
-import { SpotBlue, SpotNavy } from '../../layout';
+import { Title, Search, Button, Paragraph, FilmCard, FilmCardGrid } from '../../components';
+import { SpotBlue, SpotNavy } from '../../layouts';
 
 import BW from '../../assets/images/1.png';
 import SC from '../../assets/images/2.png';
@@ -56,7 +56,7 @@ export const MainPage = () => {
           <Button onClick={handleButtonClick}>Искать</Button>
         </div>
       </form>
-      <div className={styles['search__page-films']}>
+      <FilmCardGrid>
         {filmsInfo.map((element) => (
           <FilmCard
             key={element.title}
@@ -66,7 +66,7 @@ export const MainPage = () => {
             cover={element.cover}
           />
         ))}
-      </div>
+      </FilmCardGrid>
     </div>
   );
 };

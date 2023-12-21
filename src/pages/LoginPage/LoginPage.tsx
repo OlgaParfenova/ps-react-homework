@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { SpotBlue, SpotNavy } from '../../layout';
+import { SpotBlue, SpotNavy } from '../../layouts';
 import { Title, TextField, Button } from '../../components';
 import { UserContext } from '../../context/UserContext';
 

@@ -1,5 +1,5 @@
-import { Title, FilmCard } from '../../components';
-import { SpotBlue, SpotNavy, SpotGreen, SpotPurple } from '../../layout';
+import { Title, FilmCard, FilmCardGrid } from '../../components';
+import { SpotBlue, SpotNavy, SpotGreen, SpotPurple } from '../../layouts';
 import styles from './FavoritesPage.module.css';
 import BW from '../../assets/images/1.png';
 import SC from '../../assets/images/2.png';
@@ -19,7 +19,7 @@ export const FavoritesPage = () => {
       <SpotGreen />
       <SpotPurple />
       <Title className={styles['favorites__page-title']}>Избранное</Title>
-      <div className={styles['favorites__page-films']}>
+      <FilmCardGrid>
         {filmsInfo.map((element) => (
           <FilmCard
             key={element.title}
@@ -29,7 +29,7 @@ export const FavoritesPage = () => {
             cover={element.cover}
           />
         ))}
-      </div>
+      </FilmCardGrid>
     </div>
   );
 };

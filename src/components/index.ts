@@ -3,6 +3,7 @@ export * from './Button';
 export * from './Paragraph';
 export * from './TextField';
 export * from './FilmCard';
+export * from './FilmCardGrid';
 export * from './ButtonFavorites';
 export * from './CheckLogin';
 export * from './Search';

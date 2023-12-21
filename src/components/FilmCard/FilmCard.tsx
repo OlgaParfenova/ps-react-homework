@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonFavourites } from '../ButtonFavorites';
 import { FilmCardProps } from './FilmCard.props';
 import { FilmRating } from '../FilmRating';
+import { routes } from '../../router';
 import styles from './FilmCard.module.css';
 
 export const FilmCard: FC<FilmCardProps> = ({ cover, title, rating, id }) => {
   const navigate = useNavigate();
   const handleCLick = () => {
-    navigate(`/movie/${id}`);
+    navigate(routes.moviePageURL(id));
   };
   return (
     <div className={styles['card']}>

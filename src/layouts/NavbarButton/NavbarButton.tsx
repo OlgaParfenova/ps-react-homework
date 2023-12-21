@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import classNames from 'classnames';
 import { NavbarButtonProps } from './NavbarButton.props';
 import { NavLink } from 'react-router-dom';
@@ -16,12 +16,14 @@ export const NavbarButton: FC<NavbarButtonProps> = ({
     <NavLink
       to={to}
       {...props}
-      type='button'
-      className={({ isActive }) =>
-        classNames(styles['navbar__link'], className, {
-          [styles['active']]: isActive,
-        })
-      }>
+      className={useMemo(
+        () =>
+          ({ isActive }) =>
+            classNames(styles['navbar__link'], className, {
+              [styles['active']]: isActive,
+            }),
+        [className],
+      )}>
       {text}
       {icon ? <img src={icon} alt='' className={styles['navbar__link-icon']} /> : null}
       {label ? <div className={styles['navbar__link-label']}>{label}</div> : null}
