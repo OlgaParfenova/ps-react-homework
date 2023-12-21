@@ -1,8 +1,4 @@
-h1 {
-  color: #fff;
-}
-
-.app-wrapper {
+.outlet {
   position: relative;
   max-width: calc(1200px + 32px);
   min-height: 100%;

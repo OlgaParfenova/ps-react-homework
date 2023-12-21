@@ -1,0 +1,9 @@
+.film__rating {
+  display: inline-flex;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: var(--black-65);
+  color: #ffad49;
+}

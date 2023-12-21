@@ -1,0 +1,20 @@
+.subtitle {
+  font-style: normal;
+  margin: 0;
+}
+
+.subtitle--medium {
+  color: var(--grey-100);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.subtitle--large {
+  color: var(--grey-50);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+}

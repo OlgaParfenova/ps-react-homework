@@ -1,0 +1,69 @@
+.moviepage__wrapper {
+  width: 100%;
+  max-width: 1050px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}
+
+.film__title {
+  margin-bottom: 80px;
+}
+
+.paper__label {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--primary-200);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.film__card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.film__poster {
+  width: 480px;
+  height: 720px;
+  border-radius: 24px;
+  margin-right: 80px;
+}
+
+.film__info-paragraph {
+  margin-bottom: 24px;
+}
+
+.film__info-rating {
+  display: flex;
+  justify-content: start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.film__info-details {
+  margin-bottom: 24px;
+}
+
+.film__info-details-label {
+  margin-bottom: 8px;
+}
+
+.film__info-details-paragraph {
+  color: var(--grey-100);
+}
+
+.reviews-labeltext {
+  margin-bottom: 14px;
+  margin-left: 10px;
+}
+
+.reviews-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}

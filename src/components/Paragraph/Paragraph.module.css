@@ -2,6 +2,7 @@
   color: var(--grey-300);
   font-style: normal;
   font-weight: 400;
+  margin: 0;
 }
 
 .paragraph--medium {

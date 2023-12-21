@@ -1,15 +1,15 @@
-.search {
+.wrap {
   position: relative;
 }
 
-.search__icon {
+.wrap img {
   position: absolute;
   color: var(--grey-600);
   left: 16px;
   top: calc((64px - 24px) / 2);
 }
 
-.search__input {
+.input {
   width: 384px;
   height: 64px;
   line-height: 62px;
@@ -21,10 +21,10 @@
   font-size: 14px;
 }
 
-.search__input--icon {
+.input__icon {
   padding-left: calc(16px + 24px + 16px);
 }
 
-.search__input--error {
+.input__error {
   background-color: rgba(225, 43, 43, 0.35);
 }

@@ -11,19 +11,18 @@ import MH from '../../assets/images/5.png';
 import FR from '../../assets/images/6.png';
 import TBBT from '../../assets/images/7.png';
 import TAHM from '../../assets/images/8.png';
-import SearchIcon from '../../assets/icons/Search.svg';
 
 import styles from './MainPage.module.css';
 
 const filmsInfo = [
-  { title: 'Black widow', rating: '325', cover: BW },
-  { title: 'Shang Chi', rating: '124', cover: SC },
-  { title: 'Loki', rating: '235', cover: LOKI },
-  { title: 'How I Met Your Mother', rating: '123', cover: HIMYM },
-  { title: 'Money Heist', rating: '8125', cover: MH },
-  { title: 'Friends', rating: '123', cover: FR },
-  { title: 'The Big Bang Theory', rating: '12', cover: TBBT },
-  { title: 'Two And a Half Men', rating: '456', cover: TAHM },
+  { id: 'black-widow', title: 'Black widow', rating: 325, cover: BW },
+  { id: 'shang-chi', title: 'Shang Chi', rating: 124, cover: SC },
+  { id: 'loki', title: 'Loki', rating: 235, cover: LOKI },
+  { id: 'how-i-met-your-mother', title: 'How I Met Your Mother', rating: 123, cover: HIMYM },
+  { id: 'money-heist', title: 'Money Heist', rating: 8125, cover: MH },
+  { id: 'friends', title: 'Friends', rating: 123, cover: FR },
+  { id: 'the-big-bang-theory', title: 'The Big Bang Theory', rating: 12, cover: TBBT },
+  { id: 'two-and-a-half-men', title: 'Two And a Half Men', rating: 456, cover: TAHM },
 ];
 
 export const MainPage = () => {
@@ -49,10 +48,9 @@ export const MainPage = () => {
         <div className={styles['search__page-input']}>
           <Search
             placeholder='Введите название'
-            icon={SearchIcon}
             isButtonClicked={isButtonClicked}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
+            value={searchValue}
+            setValue={setSearchValue}
             ref={searchRef}
           />
           <Button onClick={handleButtonClick}>Искать</Button>
@@ -62,6 +60,7 @@ export const MainPage = () => {
         {filmsInfo.map((element) => (
           <FilmCard
             key={element.title}
+            id={element.id}
             title={element.title}
             rating={element.rating}
             cover={element.cover}
