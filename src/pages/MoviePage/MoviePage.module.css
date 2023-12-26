@@ -1,0 +1,27 @@
+.moviepage__wrapper {
+  width: 100%;
+  max-width: 1050px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}
+
+.film__title {
+  margin-bottom: 80px;
+}
+
+.paper__label {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--primary-200);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.reviews-labeltext {
+  margin-bottom: 14px;
+  margin-left: 10px;
+}

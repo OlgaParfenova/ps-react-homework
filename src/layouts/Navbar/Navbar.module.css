@@ -1,0 +1,29 @@
+.navbar {
+  background: rgba(18, 24, 41, 0.8);
+  backdrop-filter: blur(20px);
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 80px;
+  padding: 16px 120px;
+  z-index: 99;
+}
+
+.navbar__content {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__logo {
+  cursor: pointer;
+}
+
+.navbar__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

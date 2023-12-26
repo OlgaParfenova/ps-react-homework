@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 :root {
-  --grey-50: #ebeef5;
   --font-size-h1: 64px;
+  --primary-200: #beb7fb;
   --primary-400: #7b6ef6;
   --grey-50: #ebeef5;
+  --grey-100: #c3c8d4;
   --grey-200: #a8aebf;
   --grey-300: #8e95a9;
+  --grey-400: #767e94;
   --grey-700: #323b54;
   --grey-600: #475069;
   --black-10: rgba(0, 0, 0, 0.1);
