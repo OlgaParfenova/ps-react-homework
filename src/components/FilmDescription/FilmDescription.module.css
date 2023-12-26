@@ -1,0 +1,23 @@
+.film__description {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.film__poster {
+  width: 480px;
+  height: 720px;
+  border-radius: 24px;
+  margin-right: 80px;
+}
+
+.film__info-paragraph {
+  margin-bottom: 24px;
+}
+
+.film__info-rating {
+  display: flex;
+  justify-content: start;
+  gap: 24px;
+  margin-bottom: 24px;
+}

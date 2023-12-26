@@ -10,3 +10,6 @@ export * from './Search';
 export * from './Subtitle';
 export * from './LabelText';
 export * from './FilmRating';
+export * from './FilmDescription';
+export * from './FilmDescriptionDetails';
+export * from './ReviewItem';

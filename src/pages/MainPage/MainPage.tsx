@@ -33,7 +33,10 @@ export const MainPage = () => {
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
-    searchRef.current?.focus();
+    if (!searchRef.current) {
+      return;
+    }
+    searchRef.current.focus();
   };
 
   return (

@@ -8,5 +8,6 @@ export const CheckLogin = (): null => {
   useEffect(() => {
     if (!isLogined) navigate('/login');
   }, [isLogined, navigate]);
+  
   return null;
 };

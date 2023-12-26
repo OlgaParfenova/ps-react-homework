@@ -8,9 +8,11 @@ import styles from './FilmCard.module.css';
 
 export const FilmCard: FC<FilmCardProps> = ({ cover, title, rating, id }) => {
   const navigate = useNavigate();
+
   const handleCLick = () => {
     navigate(routes.moviePageURL(id));
   };
+
   return (
     <div className={styles['card']}>
       <div className={styles['card__backlayer']}>
@@ -24,9 +26,9 @@ export const FilmCard: FC<FilmCardProps> = ({ cover, title, rating, id }) => {
           <p className={styles['card__empty']}>Обложка не загружена</p>
         )}
       </div>
-      <div className={styles['card__title']} onClick={handleCLick}>
+      <p className={styles['card__title']} onClick={handleCLick}>
         {title}
-      </div>
+      </p>
       <ButtonFavourites className={styles['card__fav-button']} />
     </div>
   );
