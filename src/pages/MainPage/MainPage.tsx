@@ -1,33 +1,17 @@
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef, MouseEvent, useEffect } from 'react';
 
 import { Title, Search, Button, Paragraph, FilmCard, FilmCardGrid } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layouts';
 
-import BW from '../../assets/images/1.png';
-import SC from '../../assets/images/2.png';
-import LOKI from '../../assets/images/3.png';
-import HIMYM from '../../assets/images/4.png';
-import MH from '../../assets/images/5.png';
-import FR from '../../assets/images/6.png';
-import TBBT from '../../assets/images/7.png';
-import TAHM from '../../assets/images/8.png';
+import { URL, OPTIONS, PICTURE_URL } from '../../helpers';
+import { Result } from '../../types';
 
 import styles from './MainPage.module.css';
-
-const filmsInfo = [
-  { id: 'black-widow', title: 'Black widow', rating: 325, cover: BW },
-  { id: 'shang-chi', title: 'Shang Chi', rating: 124, cover: SC },
-  { id: 'loki', title: 'Loki', rating: 235, cover: LOKI },
-  { id: 'how-i-met-your-mother', title: 'How I Met Your Mother', rating: 123, cover: HIMYM },
-  { id: 'money-heist', title: 'Money Heist', rating: 8125, cover: MH },
-  { id: 'friends', title: 'Friends', rating: 123, cover: FR },
-  { id: 'the-big-bang-theory', title: 'The Big Bang Theory', rating: 12, cover: TBBT },
-  { id: 'two-and-a-half-men', title: 'Two And a Half Men', rating: 456, cover: TAHM },
-];
 
 export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [films, setFilms] = useState<Result[]>([]);
   const searchRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -38,6 +22,23 @@ export const MainPage = () => {
     }
     searchRef.current.focus();
   };
+
+  const getFilms = async () => {
+    try {
+      const response = await fetch(URL, OPTIONS);
+      if (!response.ok) return;
+      const data = await response.json();
+      console.log(data.results);
+      setFilms(data.results);
+    } catch (err) {
+      console.error('error:' + err);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    getFilms();
+  }, []);
 
   return (
     <div className={styles['search__page']}>
@@ -60,13 +61,13 @@ export const MainPage = () => {
         </div>
       </form>
       <FilmCardGrid>
-        {filmsInfo.map((element) => (
+        {films.map((element) => (
           <FilmCard
-            key={element.title}
+            key={element.id}
             id={element.id}
             title={element.title}
-            rating={element.rating}
-            cover={element.cover}
+            rating={element.vote_average}
+            cover={PICTURE_URL + element.poster_path}
           />
         ))}
       </FilmCardGrid>
