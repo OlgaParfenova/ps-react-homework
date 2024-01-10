@@ -1,4 +1,5 @@
 import { useState, useRef, MouseEvent, useEffect } from 'react';
+import axios from 'axios';
 
 import { Title, Search, Button, Paragraph, FilmCard, FilmCardGrid } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layouts';
@@ -25,11 +26,9 @@ export const MainPage = () => {
 
   const getFilms = async () => {
     try {
-      const response = await fetch(URL, OPTIONS);
-      if (!response.ok) return;
-      const data = await response.json();
-      console.log(data.results);
-      setFilms(data.results);
+      const response = await axios.get(URL, OPTIONS);
+      if (response.status !== 200) return;
+      setFilms(response.data.results);
     } catch (err) {
       console.error('error:' + err);
       return;
