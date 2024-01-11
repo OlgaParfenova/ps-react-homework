@@ -4,7 +4,6 @@ import { FilmRating } from '../FilmRating';
 import { Paragraph } from '../Paragraph';
 import { FilmDescriptionProps } from './FilmDescription.props';
 import { FilmDescriptionDetails } from '../FilmDescriptionDetails';
-import poster from '../../assets/images/film-poster-demo.png';
 import styles from './FilmDescription.module.css';
 
 export const FilmDescription: FC<FilmDescriptionProps> = ({

@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         path: routes.moviePageURL(':id'),
         element: <MoviePage />,
         loader: async ({ params }) => {
-          const response = await axios({
+          const movieResponse = await axios({
             method: 'GET',
             url: `https://api.themoviedb.org/3/movie/${params.id}`,
             headers: {
@@ -35,7 +35,19 @@ export const router = createBrowserRouter([
             },
           });
 
-          return response.data;
+          const reviewsResponse = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${params.id}/reviews`,
+            headers: {
+              accept: 'application/json',
+              Authorization: API_KEY,
+            },
+          });
+
+          return {
+            movie: movieResponse.data,
+            reviews: reviewsResponse.data,
+          };
         },
       },
       {
