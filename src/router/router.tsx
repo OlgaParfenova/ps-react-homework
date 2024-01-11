@@ -1,7 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 import { MainPage, LoginPage, NotFoundPage, MoviePage, FavoritesPage } from '../pages';
 import { Layout } from '../templates';
 import { routes } from './routes';
+import { API_KEY } from '../helpers';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +25,18 @@ export const router = createBrowserRouter([
       {
         path: routes.moviePageURL(':id'),
         element: <MoviePage />,
+        loader: async ({ params }) => {
+          const response = await axios({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/movie/${params.id}`,
+            headers: {
+              accept: 'application/json',
+              Authorization: API_KEY,
+            },
+          });
+
+          return response.data;
+        },
       },
       {
         path: '*',

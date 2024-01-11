@@ -1,13 +1,8 @@
+import { useLoaderData } from 'react-router-dom';
 import { Subtitle, LabelText, FilmDescription, ReviewItem } from '../../components';
 import { Paper, SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
+import { FilmDetails } from '../../types';
 import styles from './MoviePage.module.css';
-import img from '../../assets/images/film-poster-demo.png';
-
-const description = {
-  text: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
-  rating: 8.3,
-  poster: img,
-};
 
 const review = {
   title: 'Not as good as infinity war..',
@@ -16,6 +11,9 @@ const review = {
 };
 
 export const MoviePage = () => {
+  const data = useLoaderData() as FilmDetails;
+
+  console.log('data', data);
   return (
     <>
       <SpotBlue />
@@ -25,12 +23,15 @@ export const MoviePage = () => {
       <div className={styles['moviepage__wrapper']}>
         <Paper className={styles['film__title']}>
           <p className={styles['paper__label']}>Поиск фильмов</p>
-          <Subtitle type='large'>Avengers: Endgame</Subtitle>
+          <Subtitle type='large'>{data.title}</Subtitle>
         </Paper>
         <FilmDescription
-          description={description.text}
-          rating={description.rating}
-          poster={description.poster}
+          description={data.overview}
+          rating={Math.round(data.vote_average * 10) / 10}
+          poster={'https://image.tmdb.org/t/p/original' + data.poster_path}
+          release={data.release_date}
+          runtime={data.runtime}
+          genres={data.genres}
         />
         <div className={styles['reviews']}>
           <LabelText className={styles['reviews-labeltext']}>Отзывы</LabelText>

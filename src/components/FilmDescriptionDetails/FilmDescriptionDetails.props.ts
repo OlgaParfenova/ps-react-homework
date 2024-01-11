@@ -1,4 +1,4 @@
 export type FilmDescriptionDetailsProps = {
   label: string | number;
-  text: string | number;
+  text: string | number | string[] | number[];
 };

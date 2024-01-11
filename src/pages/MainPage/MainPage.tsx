@@ -1,18 +1,17 @@
 import { useState, useRef, MouseEvent, useEffect } from 'react';
-import axios from 'axios';
-
-import { Title, Search, Button, Paragraph, FilmCard, FilmCardGrid } from '../../components';
+import axios, { AxiosError } from 'axios';
+import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
 import { SpotBlue, SpotNavy } from '../../layouts';
-
-import { URL, OPTIONS, PICTURE_URL } from '../../helpers';
-import { Result } from '../../types';
-
+import { API_KEY } from '../../helpers';
+import { Result, Root } from '../../types';
 import styles from './MainPage.module.css';
 
 export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [films, setFilms] = useState<Result[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
   const searchRef = useRef<HTMLInputElement | null>(null);
 
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -26,11 +25,28 @@ export const MainPage = () => {
 
   const getFilms = async () => {
     try {
-      const response = await axios.get(URL, OPTIONS);
-      if (response.status !== 200) return;
+      setIsLoading(true);
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
+      const response = await axios.get<Root>(
+        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc',
+        {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: API_KEY,
+          },
+        },
+      );
       setFilms(response.data.results);
+      setIsLoading(false);
     } catch (err) {
       console.error('error:' + err);
+      if (err instanceof AxiosError) setError(err.message);
+      setIsLoading(false);
       return;
     }
   };
@@ -60,15 +76,9 @@ export const MainPage = () => {
         </div>
       </form>
       <FilmCardGrid>
-        {films.map((element) => (
-          <FilmCard
-            key={element.id}
-            id={element.id}
-            title={element.title}
-            rating={element.vote_average}
-            cover={PICTURE_URL + element.poster_path}
-          />
-        ))}
+        {error && <Paragraph type='medium'>{error}</Paragraph>}
+        {!isLoading && <FilmsList films={films} />}
+        {isLoading && <Paragraph type='medium'>Идет загрузка ...</Paragraph>}
       </FilmCardGrid>
     </div>
   );
