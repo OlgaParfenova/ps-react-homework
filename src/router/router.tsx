@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import axios from 'axios';
-import { MainPage, LoginPage, NotFoundPage, MoviePage, FavoritesPage } from '../pages';
+import { MainPage, LoginPage, NotFoundPage, MoviePage, FavoritesPage, ErrorPage } from '../pages';
 import { Layout } from '../templates';
 import { routes } from './routes';
 import { API_KEY } from '../helpers';
@@ -25,6 +25,7 @@ export const router = createBrowserRouter([
       {
         path: routes.moviePageURL(':id'),
         element: <MoviePage />,
+        errorElement: <ErrorPage />,
         loader: async ({ params }) => {
           const movieResponse = await axios({
             method: 'GET',
