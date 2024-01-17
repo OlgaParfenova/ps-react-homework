@@ -1,0 +1,10 @@
+.nothing-found__message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nothing-found__message-title {
+  margin-bottom: 30px;
+}

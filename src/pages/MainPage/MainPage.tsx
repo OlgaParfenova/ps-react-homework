@@ -1,7 +1,8 @@
-import { useState, useRef, MouseEvent, useEffect, ChangeEvent } from 'react';
+import { useState, useRef, MouseEvent, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
 import { SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
+import { Loading, NothingFound } from '../../messages';
 import { API_KEY } from '../../helpers';
 import { Result, Root } from '../../types';
 import styles from './MainPage.module.css';
@@ -82,10 +83,10 @@ export const MainPage = () => {
           <Button onClick={handleButtonClick}>Искать</Button>
         </div>
       </form>
+      {error && <Paragraph type='medium'>{error}</Paragraph>}
+      {isLoading && <Loading />}
+      {showNoResults && <NothingFound />}
       <FilmCardGrid>
-        {error && <Paragraph type='medium'>{error}</Paragraph>}
-        {isLoading && <Paragraph type='medium'>Идет загрузка ...</Paragraph>}
-        {showNoResults && <Paragraph type='medium'>Ничего не найдено ...</Paragraph>}
         {!isLoading && !showNoResults && searchResults.length === 0 ? (
           <FilmsList films={films} />
         ) : (
