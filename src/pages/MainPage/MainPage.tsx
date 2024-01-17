@@ -1,15 +1,17 @@
-import { useState, useRef, MouseEvent, useEffect } from 'react';
+import { useState, useRef, MouseEvent, useEffect, ChangeEvent } from 'react';
 import axios, { AxiosError } from 'axios';
 import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
-import { SpotBlue, SpotNavy } from '../../layouts';
+import { SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
 import { API_KEY } from '../../helpers';
 import { Result, Root } from '../../types';
 import styles from './MainPage.module.css';
 
 export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [films, setFilms] = useState<Result[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<Result[]>([]);
+  const [showNoResults, setShowNoResults] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
   const searchRef = useRef<HTMLInputElement | null>(null);
@@ -26,11 +28,6 @@ export const MainPage = () => {
   const getFilms = async () => {
     try {
       setIsLoading(true);
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 2000);
-      });
       const response = await axios.get<Root>(
         'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc',
         {
@@ -55,10 +52,20 @@ export const MainPage = () => {
     getFilms();
   }, []);
 
+  useEffect(() => {
+    const filteredFilms = films.filter((film) =>
+      film.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setSearchResults(filteredFilms);
+    setShowNoResults(filteredFilms.length === 0);
+  }, [searchQuery, films]);
+
   return (
     <div className={styles['search__page']}>
       <SpotBlue />
       <SpotNavy />
+      <SpotGreen />
+      <SpotPurple />
       <form>
         <Title className={styles['search__page-title']}>Поиск</Title>
         <Paragraph type='medium' className={styles['search__page-paragraph']}>
@@ -68,8 +75,8 @@ export const MainPage = () => {
           <Search
             placeholder='Введите название'
             isButtonClicked={isButtonClicked}
-            value={searchValue}
-            setValue={setSearchValue}
+            value={searchQuery}
+            setValue={setSearchQuery}
             ref={searchRef}
           />
           <Button onClick={handleButtonClick}>Искать</Button>
@@ -77,8 +84,13 @@ export const MainPage = () => {
       </form>
       <FilmCardGrid>
         {error && <Paragraph type='medium'>{error}</Paragraph>}
-        {!isLoading && <FilmsList films={films} />}
         {isLoading && <Paragraph type='medium'>Идет загрузка ...</Paragraph>}
+        {showNoResults && <Paragraph type='medium'>Ничего не найдено ...</Paragraph>}
+        {!isLoading && !showNoResults && searchResults.length === 0 ? (
+          <FilmsList films={films} />
+        ) : (
+          <FilmsList films={searchResults} />
+        )}
       </FilmCardGrid>
     </div>
   );
