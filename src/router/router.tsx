@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Layout } from '../templates';
 import { routes } from './routes';
-import { API_KEY } from '../helpers';
+import { API_KEY, RequireAuth } from '../helpers';
 import { Paragraph } from '../components';
 
 const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
@@ -21,9 +21,11 @@ export const router = createBrowserRouter([
       {
         path: routes.mainPageURL,
         element: (
-          <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
-            <MainPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
+              <MainPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
@@ -37,22 +39,28 @@ export const router = createBrowserRouter([
       {
         path: routes.favoritesPageURL,
         element: (
-          <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
-            <FavoritesPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
+              <FavoritesPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
       {
         path: routes.moviePageURL(':id'),
         element: (
-          <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
-            <MoviePage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
+              <MoviePage />
+            </Suspense>
+          </RequireAuth>
         ),
         errorElement: (
-          <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
-            <ErrorPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
+              <ErrorPage />
+            </Suspense>
+          </RequireAuth>
         ),
         loader: async ({ params }) => {
           const movieResponse = await axios({
@@ -82,9 +90,11 @@ export const router = createBrowserRouter([
       {
         path: '*',
         element: (
-          <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
-            <NotFoundPage />
-          </Suspense>
+          <RequireAuth>
+            <Suspense fallback={<Paragraph type='large'>Идет загрузка страницы ...</Paragraph>}>
+              <NotFoundPage />
+            </Suspense>
+          </RequireAuth>
         ),
       },
     ],
