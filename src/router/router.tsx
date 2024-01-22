@@ -3,8 +3,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Layout } from '../templates';
 import { routes } from './routes';
-import { API_KEY, RequireAuth } from '../helpers';
+import { RequireAuth } from '../helpers';
 import { Paragraph } from '../components';
+import { API_BASE } from '../API/constants';
 
 const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
@@ -65,19 +66,19 @@ export const router = createBrowserRouter([
         loader: async ({ params }) => {
           const movieResponse = await axios({
             method: 'GET',
-            url: `https://api.themoviedb.org/3/movie/${params.id}`,
+            url: `${API_BASE}/movie/${params.id}`,
             headers: {
               accept: 'application/json',
-              Authorization: API_KEY,
+              Authorization: import.meta.env.VITE_APP_KEY,
             },
           });
 
           const reviewsResponse = await axios({
             method: 'GET',
-            url: `https://api.themoviedb.org/3/movie/${params.id}/reviews`,
+            url: `${API_BASE}/movie/${params.id}/reviews`,
             headers: {
               accept: 'application/json',
-              Authorization: API_KEY,
+              Authorization: import.meta.env.VITE_APP_KEY,
             },
           });
 

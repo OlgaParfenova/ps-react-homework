@@ -14,3 +14,14 @@ export type Result = {
   vote_average: number;
   vote_count: number;
 };
+
+export type GetFilmsResponse = {
+  page: number;
+  results: Result[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type GetFilmsParams = {
+  page: number;
+};

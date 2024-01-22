@@ -1,10 +1,10 @@
 import { useState, useRef, MouseEvent, useEffect } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
 import { SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
 import { Loading, NothingFound } from '../../messages';
-import { API_KEY } from '../../helpers';
-import { Result, Root } from '../../types';
+import { Result } from '../../API/getFilms';
+import { getFilms } from '../../API/getFilms';
 import styles from './MainPage.module.css';
 
 export const MainPage = () => {
@@ -13,7 +13,7 @@ export const MainPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Result[]>([]);
   const [showNoResults, setShowNoResults] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const searchRef = useRef<HTMLInputElement | null>(null);
 
@@ -26,31 +26,20 @@ export const MainPage = () => {
     searchRef.current.focus();
   };
 
-  const getFilms = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get<Root>(
-        'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc',
-        {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-            Authorization: API_KEY,
-          },
-        },
-      );
-      setFilms(response.data.results);
-      setIsLoading(false);
-    } catch (err) {
-      console.error('error:' + err);
-      if (err instanceof AxiosError) setError(err.message);
-      setIsLoading(false);
-      return;
-    }
-  };
-
   useEffect(() => {
-    getFilms();
+    const getMovies = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getFilms({ page: 1 });
+        setFilms(response.data.results);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        if (error instanceof AxiosError) setError(error.message);
+        return error;
+      }
+    };
+    getMovies();
   }, []);
 
   useEffect(() => {
@@ -87,7 +76,7 @@ export const MainPage = () => {
       {isLoading && <Loading />}
       {showNoResults && <NothingFound />}
       <FilmCardGrid>
-        {!isLoading && !showNoResults && searchResults.length === 0 ? (
+        {!isLoading && !showNoResults && !searchResults.length ? (
           <FilmsList films={films} />
         ) : (
           <FilmsList films={searchResults} />

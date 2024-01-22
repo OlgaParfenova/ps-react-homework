@@ -4,9 +4,11 @@ import styles from './NotFoundPage.module.css';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
+
   const handleNavHomePage = () => {
     navigate('/');
   };
+  
   return (
     <div className={styles['not-found__page']}>
       <Title>Ошибка 404</Title>

@@ -4,9 +4,11 @@ import styles from './ErrorPage.module.css';
 
 export const ErrorPage = () => {
   const navigate = useNavigate();
+
   const handleNavHomePage = () => {
     navigate('/');
   };
+  
   return (
     <div className={styles['error__page']}>
       <Title className={styles['error__page-title']}>Произошла ошибка</Title>
