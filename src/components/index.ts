@@ -13,3 +13,4 @@ export * from './FilmRating';
 export * from './FilmDescription';
 export * from './FilmDescriptionDetails';
 export * from './ReviewItem';
+export * from './FilmsList';

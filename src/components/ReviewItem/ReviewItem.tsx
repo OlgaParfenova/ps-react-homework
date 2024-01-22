@@ -8,7 +8,7 @@ import styles from './ReviewItem.module.css';
 
 export const ReviewItem: FC<ReviewItemProps> = ({ title, date, text }) => {
   return (
-    <Paper>
+    <Paper className={styles['review']}>
       <div className={styles['reviews-title']}>
         <Subtitle type='medium'>{title}</Subtitle>
         <LabelText>{date}</LabelText>
