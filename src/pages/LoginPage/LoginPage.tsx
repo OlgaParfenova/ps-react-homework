@@ -1,29 +1,24 @@
-import { useState, useRef, useContext, MouseEvent } from 'react';
+import { useState, useRef, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { SpotBlue, SpotNavy } from '../../layouts';
 import { Title, TextField, Button } from '../../components';
-import { UserContext } from '../../context/UserContext';
-
+import { useAppDispatch } from '../../store';
+import { addUserThunk } from '../../store/slices/user/thunks';
 import styles from './LoginPage.module.css';
 
 export const LoginPage = () => {
-  const { setUser } = useContext(UserContext);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [value, setValue] = useState('');
   const searchRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
     searchRef.current?.focus();
     if (value !== '') {
-      const user = {
-        name: value,
-        isLogined: true,
-      };
-      setUser(user);
+      dispatch(addUserThunk(value));
       navigate('/');
     }
   };

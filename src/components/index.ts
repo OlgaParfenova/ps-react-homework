@@ -5,7 +5,6 @@ export * from './TextField';
 export * from './FilmCard';
 export * from './FilmCardGrid';
 export * from './ButtonFavorites';
-export * from './CheckLogin';
 export * from './Search';
 export * from './Subtitle';
 export * from './LabelText';
