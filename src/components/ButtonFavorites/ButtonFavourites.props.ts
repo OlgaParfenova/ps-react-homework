@@ -1,3 +1,11 @@
 import { ButtonHTMLAttributes } from 'react';
 
-export type ButtonFavouritesProps = ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonFavourites = {
+  id: number;
+  title: string;
+  rating: number;
+  poster: string;
+};
+
+export type ButtonFavouritesProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'id'> &
+  ButtonFavourites;

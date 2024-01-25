@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { userSlice } from './slices/user';
+import { favoritesSlice } from './slices/favorites';
 
 const rootReducer = combineReducers({
   [userSlice.reducerPath]: userSlice.reducer,
+  [favoritesSlice.reducerPath]: favoritesSlice.reducer,
 });
 
 export const store = configureStore({

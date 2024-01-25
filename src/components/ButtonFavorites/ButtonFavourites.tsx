@@ -1,12 +1,22 @@
-import { useState, useMemo, FC } from 'react';
+import { useMemo, FC } from 'react';
 import classNames from 'classnames';
 import { ButtonFavouritesProps } from './ButtonFavourites.props';
 import AddFavourites from '../../assets/icons/AddFavourites.svg';
 import AddedToFavourites from '../../assets/icons/AddedToFavourites.svg';
+import { useAppDispatch, useAppSelector } from '../../store';
 import styles from './ButtonFavourites.module.css';
+import { addFavoriteThunk } from '../../store/slices/favorites/thunks';
 
-export const ButtonFavourites: FC<ButtonFavouritesProps> = ({ className }) => {
-  const [isFavourite, setIsFavourite] = useState(false);
+export const ButtonFavourites: FC<ButtonFavouritesProps> = ({
+  className,
+  id,
+  title,
+  rating,
+  poster,
+}) => {
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector((state) => state.favoritesSlice.items);
+  const isFavourite = favorites.some((item) => item.id === id);
   const buttonClasses = useMemo(() => {
     return classNames(
       styles['button__favourites'],
@@ -16,7 +26,7 @@ export const ButtonFavourites: FC<ButtonFavouritesProps> = ({ className }) => {
   }, [className, isFavourite]);
 
   const handleButtonClick = () => {
-    setIsFavourite(!isFavourite);
+    dispatch(addFavoriteThunk({ id, title, rating, poster }));
   };
 
   return (

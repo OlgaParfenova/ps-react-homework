@@ -32,6 +32,8 @@ export const MoviePage = () => {
           release={movie.release_date}
           runtime={`${movie.runtime} мин`}
           genres={movie.genres}
+          id={movie.id}
+          title={movie.title}
         />
         <div>
           <LabelText className={styles['reviews__labeltext']}>Отзывы</LabelText>
