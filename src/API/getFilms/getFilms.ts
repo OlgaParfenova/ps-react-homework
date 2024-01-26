@@ -9,6 +9,7 @@ export const getFilms = async (params: Partial<GetFilmsParams> = {}) => {
     language: 'en-US',
     sort_by: 'popularity.desc',
     page: 1,
+    filter: 'Rewind',
   };
 
   const response = await axios.get<GetFilmsResponse>(`${API_BASE}/discover/movie`, {
@@ -20,6 +21,7 @@ export const getFilms = async (params: Partial<GetFilmsParams> = {}) => {
     params: {
       ...defaultParams,
       ...params,
+      query: 'bArb',
     },
   });
 

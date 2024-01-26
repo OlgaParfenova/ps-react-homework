@@ -1,4 +1,5 @@
 import { useState, useRef, MouseEvent, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import ReactPaginate from 'react-paginate';
 import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
@@ -7,29 +8,23 @@ import { Loading, NothingFound } from '../../messages';
 import { Result } from '../../API/getFilms';
 import { getFilms } from '../../API/getFilms';
 import { PageSelected } from '../../types';
-import {
-  getTotalPagesThunk,
-  setCurrentPageNumberThunk,
-} from '../../store/slices/pagination/thunks';
 import styles from './MainPage.module.css';
-import { useAppDispatch, useAppSelector } from '../../store';
 
 export const MainPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [films, setFilms] = useState<Result[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Result[]>([]);
   const [showNoResults, setShowNoResults] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const searchRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch = useAppDispatch();
+  const page = searchParams.has('page') ? +(searchParams.get('page') as string) : 1;
 
-  const currentPageNumber = useAppSelector((state) => state.paginationSlice.currentPageNumber);
-  const totalPages = useAppSelector((state) => state.paginationSlice.totalPages);
-
-  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSearchButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
     if (!searchRef.current) {
@@ -38,17 +33,21 @@ export const MainPage = () => {
     searchRef.current.focus();
   };
 
-  const handlePageClick = ({ selected }: PageSelected) => {
-    dispatch(setCurrentPageNumberThunk(selected));
+  const handlePaginationChange = ({ selected }: PageSelected) => {
+    const paramsObject = {
+      ...Object.fromEntries(searchParams),
+      page: String(selected + 1),
+    };
+    setSearchParams(paramsObject);
   };
 
   useEffect(() => {
     const getMovies = async () => {
       try {
         setIsLoading(true);
-        const response = await getFilms({ page: currentPageNumber });
+        const response = await getFilms({ page });
         setFilms(response.data.results);
-        dispatch(getTotalPagesThunk(response.data.total_pages));
+        setTotalPages(response.data.total_pages);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -57,7 +56,7 @@ export const MainPage = () => {
       }
     };
     getMovies();
-  }, [currentPageNumber]);
+  }, [page]);
 
   useEffect(() => {
     const filteredFilms = films.filter((film) =>
@@ -86,7 +85,7 @@ export const MainPage = () => {
             setValue={setSearchQuery}
             ref={searchRef}
           />
-          <Button onClick={handleButtonClick}>Искать</Button>
+          <Button onClick={handleSearchButtonClick}>Искать</Button>
         </div>
       </form>
       {error && <Paragraph type='medium'>{error}</Paragraph>}
@@ -106,13 +105,14 @@ export const MainPage = () => {
         pageCount={totalPages}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
-        onPageChange={handlePageClick}
+        initialPage={page - 1}
+        onPageChange={handlePaginationChange}
         containerClassName={styles['pagination-container']}
-        pageClassName={styles['pagination-item']}
         breakClassName={styles['pagination-item']}
         previousClassName={styles['pagination-item']}
         nextClassName={styles['pagination-item']}
         activeClassName={styles['pagination-item-active']}
+        pageLinkClassName={styles['pagination-item']}
       />
     </div>
   );
