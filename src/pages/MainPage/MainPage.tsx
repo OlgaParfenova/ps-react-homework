@@ -1,11 +1,18 @@
 import { useState, useRef, MouseEvent, useEffect } from 'react';
 import { AxiosError } from 'axios';
+import ReactPaginate from 'react-paginate';
 import { Title, Search, Button, Paragraph, FilmCardGrid, FilmsList } from '../../components';
 import { SpotBlue, SpotGreen, SpotNavy, SpotPurple } from '../../layouts';
 import { Loading, NothingFound } from '../../messages';
 import { Result } from '../../API/getFilms';
 import { getFilms } from '../../API/getFilms';
+import { PageSelected } from '../../types';
+import {
+  getTotalPagesThunk,
+  setCurrentPageNumberThunk,
+} from '../../store/slices/pagination/thunks';
 import styles from './MainPage.module.css';
+import { useAppDispatch, useAppSelector } from '../../store';
 
 export const MainPage = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -17,6 +24,11 @@ export const MainPage = () => {
   const [error, setError] = useState<string | undefined>();
   const searchRef = useRef<HTMLInputElement | null>(null);
 
+  const dispatch = useAppDispatch();
+
+  const currentPageNumber = useAppSelector((state) => state.paginationSlice.currentPageNumber);
+  const totalPages = useAppSelector((state) => state.paginationSlice.totalPages);
+
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsButtonClicked(true);
@@ -26,12 +38,17 @@ export const MainPage = () => {
     searchRef.current.focus();
   };
 
+  const handlePageClick = ({ selected }: PageSelected) => {
+    dispatch(setCurrentPageNumberThunk(selected));
+  };
+
   useEffect(() => {
     const getMovies = async () => {
       try {
         setIsLoading(true);
-        const response = await getFilms({ page: 1 });
+        const response = await getFilms({ page: currentPageNumber });
         setFilms(response.data.results);
+        dispatch(getTotalPagesThunk(response.data.total_pages));
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -40,7 +57,7 @@ export const MainPage = () => {
       }
     };
     getMovies();
-  }, []);
+  }, [currentPageNumber]);
 
   useEffect(() => {
     const filteredFilms = films.filter((film) =>
@@ -82,6 +99,21 @@ export const MainPage = () => {
           <FilmsList films={searchResults} />
         )}
       </FilmCardGrid>
+      <ReactPaginate
+        previousLabel={'Предыдущая'}
+        nextLabel={'Следующая'}
+        breakLabel={'...'}
+        pageCount={totalPages}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageClick}
+        containerClassName={styles['pagination-container']}
+        pageClassName={styles['pagination-item']}
+        breakClassName={styles['pagination-item']}
+        previousClassName={styles['pagination-item']}
+        nextClassName={styles['pagination-item']}
+        activeClassName={styles['pagination-item-active']}
+      />
     </div>
   );
 };
