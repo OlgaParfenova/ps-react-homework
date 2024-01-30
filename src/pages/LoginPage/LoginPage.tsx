@@ -1,4 +1,4 @@
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpotBlue, SpotNavy } from '../../layouts';
 import { Title, TextField, Button } from '../../components';
@@ -6,38 +6,49 @@ import { useAppDispatch } from '../../store';
 import { addUserThunk } from '../../store/slices/user/thunks';
 import styles from './LoginPage.module.css';
 
+const checkValid = (arg: string) => {
+  return arg !== '';
+};
+
 export const LoginPage = () => {
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [value, setValue] = useState('');
-  const searchRef = useRef<HTMLInputElement | null>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsButtonClicked(true);
-    searchRef.current?.focus();
-    if (value !== '') {
-      dispatch(addUserThunk(value));
-      navigate('/');
+
+    if (!checkValid(value)) {
+      setIsError(true);
+      searchRef.current?.focus();
+      return;
     }
+
+    dispatch(addUserThunk(value));
+    navigate('/');
   };
 
   return (
     <div>
       <SpotBlue />
       <SpotNavy />
-      <form>
+      <form onSubmit={handleSubmit}>
         <Title className={styles['login__page-title']}>Вход</Title>
         <div className={styles['login__page-input']}>
           <TextField
             placeholder='Ваше имя'
-            isButtonClicked={isButtonClicked}
             value={value}
-            setValue={setValue}
+            onChange={handleChangeInput}
             ref={searchRef}
+            isError={isError}
           />
-          <Button onClick={handleButtonClick}>Войти в профиль</Button>
+          <Button type='submit'>Войти в профиль</Button>
         </div>
       </form>
     </div>

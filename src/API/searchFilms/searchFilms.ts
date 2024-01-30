@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { GetFilmsResponse } from './types';
 import { API_BASE, API_KEY } from '../constants';
 
-export const getFilms = async (params: URLSearchParams) => {
+export const searchFilms = async (params: URLSearchParams) => {
   const paramsObject = Object.fromEntries(params);
 
   const defaultParams = {
@@ -11,10 +10,11 @@ export const getFilms = async (params: URLSearchParams) => {
     language: 'en-US',
     sort_by: 'popularity.desc',
     page: 1,
-    filter: 'Rewind',
+    query: '',
+    api_key: API_KEY,
   };
 
-  const response = await axios.get<GetFilmsResponse>(`${API_BASE}/discover/movie`, {
+  const response = await axios.get(`${API_BASE}/search/movie`, {
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -25,6 +25,5 @@ export const getFilms = async (params: URLSearchParams) => {
       ...paramsObject,
     },
   });
-
   return response;
 };

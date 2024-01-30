@@ -2,21 +2,6 @@
   margin-bottom: 58px;
 }
 
-.search__page-title {
-  margin-bottom: 16px;
-}
-
-.search__page-paragraph {
-  margin-bottom: 24px;
-  max-width: 590px;
-}
-
-.search__page-input {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 80px;
-}
-
 .pagination-container {
   list-style: none;
   display: flex;
@@ -54,11 +39,12 @@
     23px 0 20px -23px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.pagination-item.disabled a {
+.pagination-container.disabled a {
   background-color: #ccc;
   border-color: #ccc;
   color: #aaa;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .pagination-item-active a {
