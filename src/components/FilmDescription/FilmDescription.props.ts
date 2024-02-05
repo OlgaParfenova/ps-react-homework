@@ -6,5 +6,7 @@ export type FilmDescriptionProps = {
   poster: string;
   release: string;
   runtime: number | string;
+  id: number;
   genres: Genre[];
+  title: string;
 };

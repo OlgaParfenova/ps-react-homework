@@ -1,11 +1,10 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { ReactNode, HTMLProps } from 'react';
 
-type TextField = {
-  placeholder: string;
-  isButtonClicked: boolean;
-  value: string;
-  setValue: (value: string) => void;
+type InputProps = HTMLProps<HTMLInputElement>;
+
+type Props = {
+  isError?: boolean;
   icon?: ReactNode;
 };
 
-export type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & TextField;
+export type TextFieldProps = InputProps & Props;

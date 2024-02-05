@@ -86,3 +86,16 @@
   object-fit: cover;
   filter: blur(10px);
 }
+
+.card__buttons-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__delete-button {
+  position: relative;
+  max-height: 40px;
+  max-width: 100px;
+}

@@ -4,27 +4,21 @@ import { TextFieldProps } from './TextField.props';
 import styles from './TextField.module.css';
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ placeholder, icon, isButtonClicked, value, setValue }, ref) => {
+  ({ icon, isError, style, className, id, ...props }, ref) => {
+    const divClasses = useMemo(() => {
+      return classNames(styles['wrap'], className);
+    }, [className]);
+
     const inputClasses = useMemo(() => {
       return classNames(styles['input'], {
         [styles['input__icon']]: icon,
-        [styles['input__error']]: isButtonClicked && value === '',
+        [styles['input__error']]: isError,
       });
-    }, [icon, isButtonClicked, value]);
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
-    };
+    }, [icon, isError]);
 
     return (
-      <div className={styles['wrap']}>
-        <input
-          type='text'
-          placeholder={placeholder}
-          className={inputClasses}
-          ref={ref}
-          onChange={handleInputChange}
-        />
+      <div style={style} className={divClasses} id={id}>
+        <input {...props} type='text' className={inputClasses} ref={ref} />
         {icon || null}
       </div>
     );

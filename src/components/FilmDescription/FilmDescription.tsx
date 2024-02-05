@@ -13,6 +13,8 @@ export const FilmDescription: FC<FilmDescriptionProps> = ({
   release,
   runtime,
   genres,
+  id,
+  title,
 }) => {
   return (
     <div className={styles['film__description']}>
@@ -23,7 +25,7 @@ export const FilmDescription: FC<FilmDescriptionProps> = ({
         </Paragraph>
         <div className={styles['film__info-rating']}>
           <FilmRating rating={rating} />
-          <ButtonFavourites />
+          <ButtonFavourites rating={rating} poster={poster} title={title} id={id} />
         </div>
         <FilmDescriptionDetails label='Тип' text='Movie' />
         <FilmDescriptionDetails label='Дата выхода' text={release} />
